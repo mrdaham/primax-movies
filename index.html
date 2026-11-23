@@ -48,7 +48,26 @@ function closePopup(){document.getElementById('welcomePopup').style.display='non
 </script>
 <!-- WELCOME POPUP END -->  
   
-
+<!-- CHRISTMAS SNOW START -->
+<style>
+.snowflake{position:fixed;top:-10px;color:white;font-size:1em;z-index:10000;pointer-events:none;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(105vh)}}
+</style>
+<script>
+function createSnow(){
+  const flake=document.createElement('div');
+  flake.className='snowflake';
+  flake.textContent='❄';
+  flake.style.left=Math.random()*100+'vw';
+  flake.style.fontSize=(Math.random()*15+10)+'px';
+  flake.style.opacity=Math.random()*0.8+0.3;
+  flake.style.animationDuration=(Math.random()*4+4)+'s';
+  document.body.appendChild(flake);
+  setTimeout(()=>{flake.remove()},8000);
+}
+setInterval(createSnow,200);
+</script>
+<!-- CHRISTMAS SNOW END -->
 <div class="top">
 <div class="logo">🎬 PRIMAX<span>.MOVIES</span></div>
 <div class="login">Login</div>
