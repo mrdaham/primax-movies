@@ -108,6 +108,34 @@ setInterval(createSnow,200);
 <a class="btn outline" href="https://whatsapp.com/channel/https://"whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T">💬 WhatsApp Channel</a>
 <a class="btn outline" href="Telegram.html">📲 Telegram Channel</a>
 <a class="btn red" href="https://youtube.com/@YOUR-LINK">🎬 🎦Movie Downloader</a>
+  <!-- AVENGERS DOOMSDAY COUNTDOWN -->
+<div style="margin:30px 15px; background:#000; border-radius:20px; overflow:hidden; border:2px solid #FFD700; text-align:center; padding-bottom:20px; box-shadow:0 0 20px #FFD700;">
+  
+  <img src="https://i.imgur.com/8yK5Q6a.jpeg" style="width:100%; display:block;" alt="Avengers Doomsday">
+
+  <h2 style="color:#FFD700; margin:15px 0 5px; font-size:24px;">🔥 AVENGERS: DOOMSDAY 🔥</h2>
+  <p style="color:white; margin:0;">Coming Soon - 18 Dec 2026</p>
+
+  <div id="countdown" style="display:flex; justify-content:center; gap:10px; margin-top:15px;">
+    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="d" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">DAYS</span></div>
+    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="h" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">HOURS</span></div>
+    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="m" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">MINS</span></div>
+    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="s" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">SECS</span></div>
+  </div>
+</div>
+
+<script>
+var target = new Date("Dec 18, 2026 00:00:00").getTime();
+setInterval(function(){
+  var now = new Date().getTime();
+  var diff = target - now;
+  document.getElementById("d").innerHTML = Math.floor(diff/(1000*60*60*24));
+  document.getElementById("h").innerHTML = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  document.getElementById("m").innerHTML = Math.floor((diff%(1000*60*60))/(1000*60));
+  document.getElementById("s").innerHTML = Math.floor((diff%(1000*60))/1000);
+},1000);
+</script>
+<!-- END COUNTDOWN -->
 
 </body>
 </html>
