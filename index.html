@@ -20,6 +20,34 @@ p{padding:0 20px;font-size:18px}
 </style>
 </head>
 <body>
+<!-- WELCOME POPUP START -->
+<style>
+#welcomePopup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box}
+.popup-box{background:white;border-radius:20px;padding:30px 20px;text-align:center;max-width:380px;width:100%;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.popup-close{position:absolute;top:10px;right:15px;font-size:22px;cursor:pointer;color:#333;border:none;background:none}
+.popup-box h2{color:#111;font-size:24px;margin:10px 0}
+.popup-box h2 span{color:#ff8a00}
+.popup-box p{color:#555;font-size:15px;line-height:1.5}
+.popup-btn{display:block;padding:14px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:12px;font-size:16px;color:white;background:#25D366}
+.popup-later{display:block;margin-top:15px;color:#777;font-size:14px;text-decoration:underline;cursor:pointer}
+</style>
+
+<div id="welcomePopup">
+  <div class="popup-box">
+    <button class="popup-close" onclick="closePopup()">✕</button>
+    <div style="font-size:50px;">🔔</div>
+    <h2>Welcome to <span>PRIMAX MOVIES!</span></h2>
+    <p>By Mr. Daham<br>Stay updated with the latest Movies. Don't forget to follow our WhatsApp Channel!</p>
+    <a class="popup-btn" href="https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T" target="_blank">📱 Follow WhatsApp Channel</a>
+    <span class="popup-later" onclick="closePopup()">No thanks, maybe later</span>
+  </div>
+</div>
+
+<script>
+function closePopup(){document.getElementById('welcomePopup').style.display='none';}
+</script>
+<!-- WELCOME POPUP END -->  
+  
 
 <div class="top">
 <div class="logo">🎬 PRIMAX<span>.MOVIES</span></div>
