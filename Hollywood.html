@@ -35,7 +35,7 @@ let movieList = ["Avatar Fire and Ash","Zootopia 2","Wicked For Good","Predator 
 
 async function loadAuto(){
   for(let name of movieList){
-    let res = await fetch(`https://www.omdbapi.com/?t=${name}&apikey=${API_KEY}`);
+    let res = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(encodeURICo)}&apikey=${API_KEY}`);
     let data = await res.json();
     if(data.Response==="True"){
       allMovies.push({title:data.Title, img:data.Poster, desc:data.Plot, rating:data.imdbRating, year:data.Year});
@@ -52,6 +52,6 @@ function showMovies(){
 }
 function showDetail(i){let m=allMovies[i];document.getElementById("pTitle").innerText=m.t;document.getElementById("pImg").src=m.img;document.getElementById("pMeta").innerText="📅 "+m.date+" | ★ "+m.rate+" | "+m.cat;document.getElementById("pDesc").innerText=m.desc;document.getElementById("popup").style.display="flex";}
 function closePop(){document.getElementById("popup").style.display="none";}
-loadAuto();
+
 </script>
 </body></html>
