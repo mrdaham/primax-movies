@@ -107,7 +107,7 @@ setInterval(createSnow,200);
 
 <a class="btn outline" href="https://whatsapp.com/channel/https://"whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T">💬 WhatsApp Channel</a>
 <a class="btn outline" href="Telegram.html">📲 Telegram Channel</a>
-<a class="btn red" href="https://youtube.com/@YOUR-LINK">🎬🎦Hollywood Updates</a>
+<button onclick="openHollywood()" style="padding:12px 20px;background:#D32F2F;color:#fff;border:none;border-radius:25px;font-weight:800;font-size:15px;">🎬 Hollywood Updates</button>
   <!-- AVENGERS DOOMSDAY COUNTDOWN -->
 <div style="margin:30px 15px; background:#000; border-radius:20px; overflow:hidden; border:2px solid #FFD700; text-align:center; padding-bottom:20px; box-shadow:0 0 20px #FFD700;">
   
@@ -279,6 +279,15 @@ function toggleWa(){
   if(p.style.display === 'block'){ p.style.display = 'none'; }
   else { p.style.display = 'block'; }
 }
+  function openHollywood(){
+  let user = localStorage.getItem("primax_user");
+  if(!user){
+    alert("Mulin Login wenna ona! 🔐 Hollywood Updates balanna Login wenna!");
+    document.getElementById("loginBox").scrollIntoView({behavior:"smooth"});
+    return;
+  }
+  window.open("Hollywood.html", "_blank");
+  }
 </script>
 <!-- END FLOATING WHATSAPP -->
 </body>
