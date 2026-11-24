@@ -29,42 +29,23 @@ body{background:#0a0a0a;color:#fff;font-family:Arial;margin:0;padding:10px}
 <script>
 if(!localStorage.getItem("primax_user")){alert("Mulin Login wenna ona!");location.href="index.html";}
 
-// ===== ME THANATA OYA GE API KEY EKA DANNA =====
-const API_KEY = "PASTE_YOUR_TMDB_KEY_HERE";
-// ===============================================
-
-const STATIC_10 = [
-{t:"Avatar 3 - Fire and Ash",img:"https://en.wikipedia.org/wiki/Special:FilePath/Avatar_Fire_and_Ash_poster.jpg",date:"2025-12-19",rate:"8.8",cat:"Sci-Fi",desc:"Fire Na'vi la enawa!"},
-{t:"Zootopia 2",img:"https://en.wikipedia.org/wiki/Special:FilePath/Zootopia_2_%282025_film%29.jpg",date:"2025-11-26",rate:"8.5",cat:"Animation",desc:"Judy saha Nick ge aluth case eka!"},
-{t:"Wicked - For Good",img:"https://en.wikipedia.org/wiki/Special:FilePath/Wicked_For_Good_poster.jpg",date:"2025-11-21",rate:"8.2",cat:"Musical",desc:"Elphaba saha Glinda ge anthima kathawa!"},
-{t:"Predator - Badlands",img:"https://en.wikipedia.org/wiki/Special:FilePath/Predator_Badlands_Poster.jpg",date:"2025-11-07",rate:"7.9",cat:"Action",desc:"Aluth planet ekaka Predator kenek!"},
-{t:"Black Phone 2",img:"https://en.wikipedia.org/wiki/Special:FilePath/Black_Phone_2_poster.jpg",date:"2025-10-17",rate:"7.5",cat:"Horror",desc:"Grabber aye enawa!"},
-];
-
-let allMovies = STATIC_10;
+const API_KEY = "11a00413";
+let allMovies = [];
+let movieList = ["Avatar Fire and Ash","Zootopia 2","Wicked For Good","Predator Badlands","Black Phone 2","Guardians of the Galaxy Vol. 2"];
 
 async function loadAuto(){
-  // Key eka nathnam Static witharak pennanna
-  if(!API_KEY || API_KEY=="PASTE_YOUR_TMDB_KEY_HERE"){
-    document.getElementById("status").innerText="⚠️ API Key nathi nisa Static 5 pennanne - Key eka dammama Auto wenawa!";
-    showMovies(); return;
-  }
-  try{
-    // Hamadama aluth Trending Films 20k TMDB eken gannawa
-    let res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}&language=en-US`);
+  for(let name of movieList){
+    let res = await fetch(`https://www.omdbapi.com/?t=${name}&apikey=${API_KEY}`);
     let data = await res.json();
-    if(data.results){
-      allMovies = data.results.slice(0,20).map(m=>({
-        t:m.title, img:"https://image.tmdb.org/t/p/w500"+m.poster_path,
-        date:m.release_date||"2025", rate:m.vote_average?m.vote_average.toFixed(1):"N/A",
-        cat:"Hollywood", desc:m.overview||"Hollywood aluth film ekak!"
-      }));
-      document.getElementById("status").innerText="✅ AUTO UPDATE WELA! - "+new Date().toLocaleDateString()+" - Aluth Films "+allMovies.length+"k";
+    if(data.Response==="True"){
+      allMovies.push({title:data.Title, img:data.Poster, desc:data.Plot, rating:data.imdbRating, year:data.Year});
     }
-  }catch(e){
-    document.getElementById("status").innerText="⚠️ Internet na, parana ewa pennanne";
   }
+  document.getElementById("status").innerHTML = "✅ OMDb eken AUTO UPDATE WELA!";
+  document.getElementById("status").style.background = "green";
   showMovies();
+}
+loadAuto();
 }
 function showMovies(){
   document.getElementById("grid").innerHTML=allMovies.map((m,i)=>`<div class="card" onclick="showDetail(${i})"><span class="badge">NEW</span><span class="rate">★ ${m.rate}</span><img src="${m.img}" loading="lazy"><div class="title">${m.t}</div></div>`).join("");
