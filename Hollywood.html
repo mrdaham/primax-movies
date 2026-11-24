@@ -15,73 +15,35 @@ body{background:#0a0a0a;color:#fff;font-family:Arial;margin:0;padding:10px}
 </style></head>
 <body>
 <h2 style="text-align:center;">🎬 Hollywood Updates</h2>
-<p style="text-align:center;color:#aaa;font-size:13px;">🔥 Aluth ewa thaniyama update wenawa | Poster eka touch karanna 👇</p>
-<p id="status" style="text-align:center;color:#FFC107;font-size:12px;">Loading aluth films... ⏳</p>
+<p style="text-align:center;color:#aaa;font-size:13px;">Poster eka touch karanna 👇</p>
+<p id="status" style="text-align:center;color:#FFC107;font-size:12px;">Loading...</p>
 <div class="grid" id="grid"></div>
-
 <div id="popup" onclick="if(event.target==this)closePop()"><div class="pop">
 <span style="float:right;font-size:22px;cursor:pointer" onclick="closePop()">✕</span>
 <img id="pImg" src=""><h3 id="pTitle"></h3>
 <p id="pMeta" style="color:#FFC107;font-size:13px;"></p>
 <p id="pDesc" style="color:#ccc;font-size:14px;line-height:1.6;"></p>
-<a class="btn" href="#" onclick="alert('Download link laga update karamu! 🔜');return false;">⬇️ Download / Watch Now</a>
+<a class="btn" href="#" onclick="alert('Download link laga update karamu!');return false;">⬇️ Download / Watch Now</a>
 <a href="index.html" style="display:block;text-align:center;color:#aaa;margin-top:12px;text-decoration:none;">⬅️ Back to Home</a>
 </div></div>
-
 <script>
-if(!localStorage.getItem("primax_user")){alert("Mulin Login wenna ona! 🔐");location.href="index.html";}
-
-// ===== ME THANATA OYAGE API KEY EKA DANNA =====
-const API_KEY = "ME_THANATA_OYAGE_TMDB_API_KEY_DANNA";
-// ===============================================
-
-const IMG = "https://image.tmdb.org/t/p/w500";
-let allMovies = [];
-
-// API KEY nathnam - 10k static films pennanna (Poster hari)
+if(!localStorage.getItem("primax_user")){alert("Mulin Login wenna ona!");location.href="index.html";}
 const STATIC_10 = [
-{t:"Avatar 3 - Fire and Ash",img:"https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",date:"2025-12-19",rate:"8.8",cat:"Sci-Fi",desc:"Fire Na'vi la enawa! Pandora eke aluth lokayak!"},
-{t:"Zootopia 2",img:"https://via.placeholder.com/300x450/9C27B0/fff?text=ZOOTOPIA+2",date:"2025-11-26",rate:"8.5",cat:"Animation",desc:"Judy saha Nick ge aluth case eka! Snake ekek enawa!"},
-{t:"Wicked - For Good",img:"https://via.placeholder.com/300x450/4CAF50/fff?text=WICKED+2",date:"2025-11-21",rate:"8.2",cat:"Musical",desc:"Elphaba saha Glinda ge anthima kathawa! Oz eke yudde!"},
-{t:"Predator - Badlands",img:"https://via.placeholder.com/300x450/FF5722/fff?text=PREDATOR",date:"2025-11-07",rate:"7.9",cat:"Action",desc:"Aluth planet ekaka Predator kenek! Thaniwama satahan karanawa!"},
-{t:"Black Phone 2",img:"https://via.placeholder.com/300x450/212121/fff?text=BLACK+PHONE+2",date:"2025-10-17",rate:"7.5",cat:"Horror",desc:"Grabber aye enawa! Phone eka aye ring wenawa!"},
-{t:"Tron - Ares",img:"https://via.placeholder.com/300x450/00BCD4/fff?text=TRON+ARES",date:"2025-10-10",rate:"7.4",cat:"Sci-Fi",desc:"AI program ekak real world ekata enawa!"},
-{t:"The Conjuring - Last Rites",img:"https://via.placeholder.com/300x450/795548/fff?text=CONJURING",date:"2025-09-05",rate:"7.2",cat:"Horror",desc:"Warren la ge anthima case eka! Bayanakama eka!"},
-{t:"The Running Man",img:"https://via.placeholder.com/300x450/F44336/fff?text=RUNNING+MAN",date:"2025-11-14",rate:"7.8",cat:"Action",desc:"TV show ekaka diwi diwi innawa! Dina ganna ba nam marenawa!"},
-{t:"Now You See Me - Now You Dont",img:"https://via.placeholder.com/300x450/3F51B5/fff?text=NOW+YOU+SEE+ME",date:"2025-11-14",rate:"7.6",cat:"Crime",desc:"Four Horsemen la aye enawa! Lokuma magic heist eka!"},
-{t:"Five Nights at Freddy's 2",img:"https://via.placeholder.com/300x450/FF9800/fff?text=FNAF+2",date:"2025-12-05",rate:"7.1",cat:"Horror",desc:"Freddy la aye enawa! Thawa bayanakari!"},
+{t:"Avatar 3 - Fire and Ash",img:"https://upload.wikimedia.org/wikipedia/en/8/8a/Avatar_Fire_and_Ash_poster.jpg",date:"2025-12-19",rate:"8.8",cat:"Sci-Fi",desc:"Fire Na'vi la enawa! Pandora eke aluth lokayak!"},
+{t:"Zootopia 2",img:"https://upload.wikimedia.org/wikipedia/en/6/6a/Zootopia_2_%282025_film%29.jpg",date:"2025-11-26",rate:"8.5",cat:"Animation",desc:"Judy saha Nick ge aluth case eka!"},
+{t:"Wicked - For Good",img:"https://upload.wikimedia.org/wikipedia/en/3/3f/Wicked_For_Good_poster.jpg",date:"2025-11-21",rate:"8.2",cat:"Musical",desc:"Elphaba saha Glinda ge anthima kathawa!"},
+{t:"Predator - Badlands",img:"https://upload.wikimedia.org/wikipedia/en/9/9e/Predator_Badlands_Poster.jpg",date:"2025-11-07",rate:"7.9",cat:"Action",desc:"Aluth planet ekaka Predator kenek!"},
+{t:"Black Phone 2",img:"https://upload.wikimedia.org/wikipedia/en/a/a9/Black_Phone_2_poster.jpg",date:"2025-10-17",rate:"7.5",cat:"Horror",desc:"Grabber aye enawa!"},
+{t:"Tron - Ares",img:"https://upload.wikimedia.org/wikipedia/en/d/d5/Tron_Ares_poster.jpg",date:"2025-10-10",rate:"7.4",cat:"Sci-Fi",desc:"AI program ekak real world ekata enawa!"},
+{t:"The Conjuring - Last Rites",img:"https://upload.wikimedia.org/wikipedia/en/5/59/The_Conjuring_Last_Rites_poster.jpg",date:"2025-09-05",rate:"7.2",cat:"Horror",desc:"Warren la ge anthima case eka!"},
+{t:"The Running Man",img:"https://upload.wikimedia.org/wikipedia/en/1/1e/The_Running_Man_2025_poster.jpg",date:"2025-11-14",rate:"7.8",cat:"Action",desc:"TV show ekaka diwi diwi innawa!"},
+{t:"Now You See Me - Now You Dont",img:"https://upload.wikimedia.org/wikipedia/en/8/8f/Now_You_See_Me_Now_You_Don%27t_poster.jpg",date:"2025-11-14",rate:"7.6",cat:"Crime",desc:"Four Horsemen la aye enawa!"},
+{t:"Five Nights at Freddy's 2",img:"https://upload.wikimedia.org/wikipedia/en/3/3c/Five_Nights_at_Freddy%27s_2_poster.jpg",date:"2025-12-05",rate:"7.1",cat:"Horror",desc:"Freddy la aye enawa!"},
 ];
-
-function showMovies(list){
-  document.getElementById("status").innerText = "✅ Aluth films "+list.length+"k update wela! | "+new Date().toLocaleDateString();
-  document.getElementById("grid").innerHTML = list.slice(0,20).map((m,i)=>{
-    let img = m.poster_path ? IMG+m.poster_path : m.img;
-    let title = m.title || m.t;
-    let rate = m.vote_average ? m.vote_average.toFixed(1) : m.rate;
-    let date = m.release_date || m.date;
-    return `<div class="card" onclick="showDetail(${i})"><span class="badge">NEW</span><span class="rate">★ ${rate}</span><img src="${img}" onerror="this.src='https://via.placeholder.com/300x450/D32F2F/fff?text=${encodeURIComponent(title)}'"><div class="title">${title}</div></div>`
-  }).join("");
-}
-function showDetail(i){
-  let m = allMovies[i];
-  document.getElementById("pTitle").innerText = m.title || m.t;
-  document.getElementById("pImg").src = m.poster_path ? IMG+m.poster_path : m.img;
-  document.getElementById("pMeta").innerText = "📅 "+(m.release_date||m.date)+" | ★ "+(m.vote_average?m.vote_average.toFixed(1):m.rate)+" | "+(m.cat||"Hollywood");
-  document.getElementById("pDesc").innerText = m.overview || m.desc || "Details laga update karamu!";
-  document.getElementById("popup").style.display="flex";
-}
+let allMovies=STATIC_10;
+document.getElementById("status").innerText="✅ Aluth films 10k update wela!";
+document.getElementById("grid").innerHTML=allMovies.map((m,i)=>`<div class="card" onclick="showDetail(${i})"><span class="badge">NEW</span><span class="rate">★ ${m.rate}</span><img src="${m.img}" onerror="this.src='https://via.placeholder.com/300x450/D32F2F/fff?text=${encodeURIComponent(m.t)}'"><div class="title">${m.t}</div></div>`).join("");
+function showDetail(i){let m=allMovies[i];document.getElementById("pTitle").innerText=m.t;document.getElementById("pImg").src=m.img;document.getElementById("pMeta").innerText="📅 "+m.date+" | ★ "+m.rate+" | "+m.cat;document.getElementById("pDesc").innerText=m.desc;document.getElementById("popup").style.display="flex";}
 function closePop(){document.getElementById("popup").style.display="none";}
-
-async function load(){
-  if(!API_KEY || API_KEY.includes("ME_THANATA")){
-    allMovies = STATIC_10; showMovies(STATIC_10); return;
-  }
-  try{
-    let r = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US`);
-    let d = await r.json();
-    allMovies = d.results; showMovies(d.results);
-  }catch(e){ allMovies = STATIC_10; showMovies(STATIC_10); }
-}
-load();
 </script>
 </body></html>
