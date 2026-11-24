@@ -173,10 +173,9 @@ setInterval(function(){
     <div style="background:#0B3D2E; padding:16px; border-radius:15px; margin:10px 0; border:1px solid #00FF88;">
       <p style="color:white; margin:0; font-weight:bold; font-size:16px;">🔗 Share & Earn</p>
       <p style="color:#B8FFD9; font-size:12px; margin:6px;">Share our channel to 1 friend = 10 Coins<br>Share to 2 friends = 20 Coins</p>
-      <a href="https://wa.me/?text=🔥%20JOIN%20PRIMAX%20MOVIES%20🔥%0A%0ABest%20Movie%20Channel%20in%20Sri%20Lanka!%20🎬%0A%0A👉%20Follow%20Here:%20Ohttps://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T%0A%0A💰%20Get%20Free%20Coins%20%26%20Request%20Movies!" target="_blank" style="display:block; background:#25D366; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold;">📲 SHARE ON WHATSAPP</a>
-      <input id="shareCount" type="number" placeholder="How many friends did you share to? Ex: 2" style="width:92%; padding:11px; border-radius:10px; border:1px solid #00FF88; background:#06281C; color:white; margin-top:8px; outline:none;">
-      <button onclick="claimShare()" style="width:100%; padding:11px; background:#00FF88; color:#06281C; border:none; border-radius:10px; margin-top:8px; font-weight:bold;">CLAIM SHARE COINS</button>
-    </div>
+      <button onclick="shareChannel()" style="width:100%;background:#25D366;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:800;margin:8px 0;">📱 SHARE ON WHATSAPP</button>
+<button onclick="claimShare()" style="width:100%;padding:12px;background:#00c853;color:#000;border:none;border-radius:10px;font-weight:800;">CLAIM SHARE COINS</button>
+      </div>
 
     <!-- REQUEST -->
     <h3 style="color:#00FF88;">🎬 REQUEST A MOVIE</h3>
@@ -215,13 +214,23 @@ function claimFollow(){
   setCoins(getCoins()+50);
   alert("50 Coins Added! 🪙");
 }
-function claimShare(){
-  var c=parseInt(document.getElementById("shareCount").value||"0");
-  if(c<=0){ alert("Enter how many friends you shared to!"); return; }
-  setCoins(getCoins() + (c*10));
-  alert((c*10)+" Coins Added! 🪙");
-  document.getElementById("shareCount").value="";
+let didShare = false;
+function shareChannel(){
+  didShare = true;
+  let msg = "🔥 JOIN PRIMAX MOVIES 🔥%0A%0ABest Movie Channel in Sri Lanka! 🎬%0A%0A👉 Follow Here: https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T%0A%0A💰 Get Free Coins & Request Movies!";
+  window.open("https://wa.me/?text=" + msg, "_blank");
+  alert("Dan WhatsApp eke friend kenekta yawanna! Ita passe CLAIM obanna.");
 }
+function claimShare(){
+  if(!didShare){
+    alert("Mulin SHARE ON WHATSAPP button eka obanna! Share karanne nathuwa claim karanna ba!");
+    return;
+  }
+  setCoins(getCoins() + 10);
+  alert("10 Coins Added! 😍");
+  didShare = false;
+}
+
 function sendRequest(){
   var m=document.getElementById("movieName").value.trim();
   var u=localStorage.getItem("primax_user");
