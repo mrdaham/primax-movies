@@ -16,7 +16,7 @@ body{background:#0a0a0a;color:#fff;font-family:Arial;margin:0;padding:10px}
 <body>
 <h2 style="text-align:center;">🎬 Hollywood Updates</h2>
 <p style="text-align:center;color:#aaa;font-size:13px;">Poster eka touch karanna 👇</p>
-<p id="status" style="text-align:center;color:#FFC107;font-size:12px;">Loading...</p>
+<p id="status" style="text-align:center;color:#FFC107;font-size:12px;">Loading Auto Updates...</p>
 <div class="grid" id="grid"></div>
 <div id="popup" onclick="if(event.target==this)closePop()"><div class="pop">
 <span style="float:right;font-size:22px;cursor:pointer" onclick="closePop()">✕</span>
@@ -28,22 +28,49 @@ body{background:#0a0a0a;color:#fff;font-family:Arial;margin:0;padding:10px}
 </div></div>
 <script>
 if(!localStorage.getItem("primax_user")){alert("Mulin Login wenna ona!");location.href="index.html";}
+
+// ===== ME THANATA OYA GE API KEY EKA DANNA =====
+const API_KEY = "PASTE_YOUR_TMDB_KEY_HERE";
+// ===============================================
+
 const STATIC_10 = [
 {t:"Avatar 3 - Fire and Ash",img:"https://en.wikipedia.org/wiki/Special:FilePath/Avatar_Fire_and_Ash_poster.jpg",date:"2025-12-19",rate:"8.8",cat:"Sci-Fi",desc:"Fire Na'vi la enawa!"},
 {t:"Zootopia 2",img:"https://en.wikipedia.org/wiki/Special:FilePath/Zootopia_2_%282025_film%29.jpg",date:"2025-11-26",rate:"8.5",cat:"Animation",desc:"Judy saha Nick ge aluth case eka!"},
 {t:"Wicked - For Good",img:"https://en.wikipedia.org/wiki/Special:FilePath/Wicked_For_Good_poster.jpg",date:"2025-11-21",rate:"8.2",cat:"Musical",desc:"Elphaba saha Glinda ge anthima kathawa!"},
 {t:"Predator - Badlands",img:"https://en.wikipedia.org/wiki/Special:FilePath/Predator_Badlands_Poster.jpg",date:"2025-11-07",rate:"7.9",cat:"Action",desc:"Aluth planet ekaka Predator kenek!"},
 {t:"Black Phone 2",img:"https://en.wikipedia.org/wiki/Special:FilePath/Black_Phone_2_poster.jpg",date:"2025-10-17",rate:"7.5",cat:"Horror",desc:"Grabber aye enawa!"},
-{t:"Tron - Ares",img:"https://en.wikipedia.org/wiki/Special:FilePath/Tron_Ares_poster.jpg",date:"2025-10-10",rate:"7.4",cat:"Sci-Fi",desc:"AI program ekak real world ekata enawa!"},
-{t:"The Conjuring - Last Rites",img:"https://en.wikipedia.org/wiki/Special:FilePath/The_Conjuring_Last_Rites_poster.jpg",date:"2025-09-05",rate:"7.2",cat:"Horror",desc:"Warren la ge anthima case eka!"},
-{t:"The Running Man",img:"https://en.wikipedia.org/wiki/Special:FilePath/The_Running_Man_2025_poster.jpg",date:"2025-11-14",rate:"7.8",cat:"Action",desc:"TV show ekaka diwi diwi innawa!"},
-{t:"Now You See Me - Now You Dont",img:"https://en.wikipedia.org/wiki/Special:FilePath/Now_You_See_Me_Now_You_Don%27t_poster.jpg",date:"2025-11-14",rate:"7.6",cat:"Crime",desc:"Four Horsemen la aye enawa!"},
-{t:"Five Nights at Freddy's 2",img:"https://en.wikipedia.org/wiki/Special:FilePath/Five_Nights_at_Freddy%27s_2_poster.jpg",date:"2025-12-05",rate:"7.1",cat:"Horror",desc:"Freddy la aye enawa!"},
 ];
-let allMovies=STATIC_10;
-document.getElementById("status").innerText="✅ Aluth films 10k update wela!";
-document.getElementById("grid").innerHTML=allMovies.map((m,i)=>`<div class="card" onclick="showDetail(${i})"><span class="badge">NEW</span><span class="rate">★ ${m.rate}</span><img src="${m.img}" onerror="this.src='https://via.placeholder.com/300x450/D32F2F/fff?text=${encodeURIComponent(m.t)}'"><div class="title">${m.t}</div></div>`).join("");
+
+let allMovies = STATIC_10;
+
+async function loadAuto(){
+  // Key eka nathnam Static witharak pennanna
+  if(!API_KEY || API_KEY=="PASTE_YOUR_TMDB_KEY_HERE"){
+    document.getElementById("status").innerText="⚠️ API Key nathi nisa Static 5 pennanne - Key eka dammama Auto wenawa!";
+    showMovies(); return;
+  }
+  try{
+    // Hamadama aluth Trending Films 20k TMDB eken gannawa
+    let res = await fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}&language=en-US`);
+    let data = await res.json();
+    if(data.results){
+      allMovies = data.results.slice(0,20).map(m=>({
+        t:m.title, img:"https://image.tmdb.org/t/p/w500"+m.poster_path,
+        date:m.release_date||"2025", rate:m.vote_average?m.vote_average.toFixed(1):"N/A",
+        cat:"Hollywood", desc:m.overview||"Hollywood aluth film ekak!"
+      }));
+      document.getElementById("status").innerText="✅ AUTO UPDATE WELA! - "+new Date().toLocaleDateString()+" - Aluth Films "+allMovies.length+"k";
+    }
+  }catch(e){
+    document.getElementById("status").innerText="⚠️ Internet na, parana ewa pennanne";
+  }
+  showMovies();
+}
+function showMovies(){
+  document.getElementById("grid").innerHTML=allMovies.map((m,i)=>`<div class="card" onclick="showDetail(${i})"><span class="badge">NEW</span><span class="rate">★ ${m.rate}</span><img src="${m.img}" loading="lazy"><div class="title">${m.t}</div></div>`).join("");
+}
 function showDetail(i){let m=allMovies[i];document.getElementById("pTitle").innerText=m.t;document.getElementById("pImg").src=m.img;document.getElementById("pMeta").innerText="📅 "+m.date+" | ★ "+m.rate+" | "+m.cat;document.getElementById("pDesc").innerText=m.desc;document.getElementById("popup").style.display="flex";}
 function closePop(){document.getElementById("popup").style.display="none";}
+loadAuto();
 </script>
 </body></html>
