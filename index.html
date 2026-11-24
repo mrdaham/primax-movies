@@ -289,6 +289,32 @@ function toggleWa(){
   window.open("Hollywood.html", "_blank");
   }
 </script>
+  <!-- START OMDb AUTO MOVIES -->
+<script>
+const OMDB_KEY = "11a00413";
+let movieList = ["Avatar", "Avengers Endgame", "Pushpa 2", "Jawan", "Interstellar"];
+
+async function loadMovies() {
+  let box = document.getElementById("movies");
+  if(!box) return;
+  box.innerHTML = "";
+  for (let name of movieList) {
+    let res = await fetch(`https://www.omdbapi.com/?t=${name}&apikey=${OMDB_KEY}`);
+    let data = await res.json();
+    if (data.Response === "True") {
+      box.innerHTML += `
+        <div class="movie-card">
+          <img src="${data.Poster}">
+          <h3>${data.Title}</h3>
+          <p>⭐ ${data.imdbRating} | ${data.Year}</p>
+        </div>
+      `;
+    }
+  }
+}
+loadMovies();
+</script>
+<!-- END OMDb -->
 <!-- END FLOATING WHATSAPP -->
 </body>
 </html>
