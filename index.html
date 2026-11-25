@@ -34,7 +34,6 @@ button{width:100%;padding:14px;border:none;border-radius:12px;background:#e50914
 <p style="font-size:13px;color:#aaa" onclick="backToPhone()">← Number eka wenas karanna</p>
 </div>
 <div id="msg"></div>
-<div id="userInfo" style="display:none"></div>
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -78,10 +77,10 @@ if(code.length !== 6){ showMsg('OTP 6 digits gahanna'); return; }
 showMsg('Checking...');
 try{
 const result = await confirmationResult.confirm(code);
-document.getElementById('otpSection').style.display = 'none';
-showMsg('Login Successful!', true);
-document.getElementById('userInfo').style.display = 'block';
-document.getElementById('userInfo').innerHTML = `<p>Phone: <b>${result.user.phoneNumber}</b></p><p style="color:#00e676">✅ PRIMAX MOVIES ta Login Una!</p>`;
+localStorage.setItem("primax_logged","yes");
+localStorage.setItem("primax_phone", result.user.phoneNumber);
+showMsg('Login Successful! Home ekata yawanawa...', true);
+setTimeout(()=>{ window.location.href = "home.html"; }, 1000);
 }catch(e){ showMsg('OTP waradi! ' + e.message); }
 };
 window.backToPhone = () => {
