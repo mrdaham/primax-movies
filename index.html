@@ -1,326 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRIMAX MOVIES</title>
+<title>Primax Movies - Login</title>
 <style>
-body{margin:0;font-family:Arial;background:#FF4D00;text-align:center;color:black}
-.top{display:flex;justify-content:space-between;align-items:center;padding:15px}
-.logo{font-size:22px;font-weight:900}
-.logo span{color:#FFC107}
-.login{background:#FFC107;padding:8px 20px;border-radius:20px;font-weight:bold}
-h1{font-size:48px;line-height:1.1;margin:20px 10px}
-h1 span{color:#FFC107}
-p{padding:0 20px;font-size:18px}
-.btn{display:block;margin:12px 20px;padding:15px;border-radius:30px;font-size:18px;font-weight:bold;text-decoration:none}
-.yellow{background:#FFC107;color:white}
-.white{background:white;color:#FF4D00}
-.outline{border:2px solid #FFC107;color:#FFC107}
-.red{background:#E60000;color:white}
-
-  #movies{display:flex;flex-wrap:wrap;gap:15px;justify-content:center;padding:15px}
-.movie-card{width:160px;background:#222;color:white;border-radius:10px;padding:10px;text-align:center}
-.movie-card img{width:100%;border-radius:8px}
-.movie-card h3{font-size:14px;margin:8px 0 4px}
-.movie-card p{font-size:12px;color:#ccc;margin:0}
-</style></head>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{margin:0;background:#0f0f0f;color:white;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:16px}
+.card{background:#1c1c1c;width:100%;max-width:380px;padding:28px;border-radius:20px;text-align:center}
+.logo{font-size:32px;font-weight:900;color:#e50914}
+.logo span{color:white}
+.sub{color:#aaa;font-size:14px;margin:8px 0 22px}
+input{width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#2a2a2a;color:white;font-size:16px;margin-bottom:12px}
+button{width:100%;padding:14px;border:none;border-radius:12px;background:#e50914;color:white;font-size:16px;font-weight:700}
+#otpSection{display:none}
+#msg{margin-top:14px;font-size:14px;min-height:20px;color:#ffcc00}
+#recaptcha-container{margin:10px 0;display:flex;justify-content:center}
+.success{color:#00e676!important}
+</style>
+</head>
 <body>
-<!-- WELCOME POPUP START -->
-<style>
-#welcomePopup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box}
-.popup-box{background:white;border-radius:20px;padding:30px 20px;text-align:center;max-width:380px;width:100%;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
-.popup-close{position:absolute;top:10px;right:15px;font-size:22px;cursor:pointer;color:#333;border:none;background:none}
-.popup-box h2{color:#111;font-size:24px;margin:10px 0}
-.popup-box h2 span{color:#ff8a00}
-.popup-box p{color:#555;font-size:15px;line-height:1.5}
-.popup-btn{display:block;padding:14px;border-radius:12px;text-decoration:none;font-weight:bold;margin-top:12px;font-size:16px;color:white;background:#25D366}
-.popup-later{display:block;margin-top:15px;color:#777;font-size:14px;text-decoration:underline;cursor:pointer}
-</style>
-
-<div id="welcomePopup">
-  <div class="popup-box">
-    <button class="popup-close" onclick="closePopup()">✕</button>
-    <div style="font-size:50px;">🔔</div>
-    <h2>Welcome to <span>PRIMAX MOVIES!</span></h2>
-    <p>By Mr. Daham<br>Stay updated with the latest Movies. Don't forget to follow our WhatsApp Channel!</p>
-    <a class="popup-btn" href="https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T" target="_blank">📱 Follow WhatsApp Channel</a>
-    <span class="popup-later" onclick="closePopup()">No thanks, maybe later</span>
-  </div>
+<div class="card">
+<div class="logo">PRIMAX <span>MOVIES</span></div>
+<div class="sub">Phone Number eken Login Wenna</div>
+<div id="phoneSection">
+<input id="phone" type="tel" placeholder="+94 7X XXX XXXX" value="+94">
+<div id="recaptcha-container"></div>
+<button id="sendBtn" onclick="sendOTP()">OTP Yawanna</button>
 </div>
-
-<script>
-function closePopup(){document.getElementById('welcomePopup').style.display='none';}
-</script>
-<!-- WELCOME POPUP END -->  
-  
-<!-- CHRISTMAS SNOW START -->
-<style>
-.snowflake{position:fixed;top:-10px;color:white;font-size:1em;z-index:10000;pointer-events:none;animation:fall linear infinite}
-@keyframes fall{to{transform:translateY(105vh)}}
-</style>
-<script>
-function createSnow(){
-  const flake=document.createElement('div');
-  flake.className='snowflake';
-  flake.textContent='❄';
-  flake.style.left=Math.random()*100+'vw';
-  flake.style.fontSize=(Math.random()*15+10)+'px';
-  flake.style.opacity=Math.random()*0.8+0.3;
-  flake.style.animationDuration=(Math.random()*4+4)+'s';
-  document.body.appendChild(flake);
-  setTimeout(()=>{flake.remove()},8000);
-}
-setInterval(createSnow,200);
-</script>
-<!-- CHRISTMAS SNOW END -->
-  <style>
-.bounce-letter{display:inline-block;animation:bounceUpDown 1s ease-in-out infinite}
-@keyframes bounceUpDown{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-</style>
-<div class="top">
-<div class="logo">🎬 PRIMAX<span>.MOVIES</span></div>
-<div class="login">Login</div>
+<div id="otpSection">
+<input id="otp" type="text" placeholder="OTP Code 6 digits" maxlength="6">
+<button onclick="verifyOTP()">Verify & Login</button>
+<p style="font-size:13px;color:#aaa" onclick="backToPhone()">← Number eka wenas karanna</p>
 </div>
-  <style>
-.dot-loader{
-  display:flex; gap:10px; justify-content:center; margin:20px;
-}
-.dot-loader span{
-  width:14px; height:14px; background:#00ff88; border-radius:50%;
-  animation: bounce 0.6s infinite alternate;
-}
-.dot-loader span:nth-child(2){ animation-delay:0.2s; background:#fff; }
-.dot-loader span:nth-child(3){ animation-delay:0.4s; background:#00ff88; }
-
-@keyframes bounce{
-  from{ transform: translateY(0); }
-  to{ transform: translateY(-18px); }
-}
-</style>
-
-<div class="dot-loader">
-  <span></span>
-  <span></span>
-  <span></span>
+<div id="msg"></div>
+<div id="userInfo" style="display:none"></div>
 </div>
-<p style="text-align:center; color:white;">Loading...</p>
-<h2 style="color:white;text-align:center;margin-top:20px">🎬 Latest Movies - Auto Updated</h2>
-<div id="movies"><p style="color:white;text-align:center">Loading movies...</p></div>
-<h1>PRIMAX<br><span>MOVIES</span><br><span class="bounce-letter">&</span> TRAILERS</h1>
-<p>අලුත්ම Movies, Updates & Trailers ඔක්කොම මෙතනින්. මුලින්ම බලන්න අපේ Channel එකට Join වෙන්න.</p>
-
-<a class="btn yellow" href="https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T">✅ Get Started Now!</a>
-
-<a class="btn outline" href="https://whatsapp.com/channel/https://"whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T">💬 WhatsApp Channel</a>
-<a class="btn outline" href="Telegram.html">📲 Telegram Channel</a>
-<button onclick="openHollywood()" style="padding:12px 20px;background:#D32F2F;color:#fff;border:none;border-radius:25px;font-weight:800;font-size:15px;">🎬 Hollywood Updates</button>
-  <!-- AVENGERS DOOMSDAY COUNTDOWN -->
-<div style="margin:30px 15px; background:#000; border-radius:20px; overflow:hidden; border:2px solid #FFD700; text-align:center; padding-bottom:20px; box-shadow:0 0 20px #FFD700;">
-  
-  <img src="https://lumiere-a.akamaihd.net/v1/images/image_c032ad1b.jpeg?region=0,0,540,810" style="width:100%; display:block;" alt="Avengers Doomsday">
-
-  <h2 style="color:#FFD700; margin:15px 0 5px; font-size:24px;">🔥 AVENGERS: DOOMSDAY 🔥</h2>
-  <p style="color:white; margin:0;">Coming Soon - 18 Dec 2026</p>
-
-  <div id="countdown" style="display:flex; justify-content:center; gap:10px; margin-top:15px;">
-    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="d" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">DAYS</span></div>
-    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="h" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">HOURS</span></div>
-    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="m" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">MINS</span></div>
-    <div style="background:#222; padding:10px; border-radius:10px; min-width:60px;"><b id="s" style="color:white; font-size:22px;">00</b><br><span style="color:#FFD700; font-size:12px;">SECS</span></div>
-  </div>
-</div>
-
-<script>
-var target = new Date("Dec 18, 2026 00:00:00").getTime();
-setInterval(function(){
-  var now = new Date().getTime();
-  var diff = target - now;
-  document.getElementById("d").innerHTML = Math.floor(diff/(1000*60*60*24));
-  document.getElementById("h").innerHTML = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  document.getElementById("m").innerHTML = Math.floor((diff%(1000*60*60))/(1000*60));
-  document.getElementById("s").innerHTML = Math.floor((diff%(1000*60))/1000);
-},1000);
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+const firebaseConfig = {
+apiKey: "AIzaSyD3xuz8MRLEjFFMIuJ8DoIeWH74WVjdt4k",
+authDomain: "primax-movies-58f56.firebaseapp.com",
+projectId: "primax-movies-58f56",
+storageBucket: "primax-movies-58f56.firebasestorage.app",
+messagingSenderId: "933755751855",
+appId: "1:933755751855:web:d1da202039df46914ff35a"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+let confirmationResult = null;
+let recaptchaVerifier = null;
+function showMsg(t, ok=false){
+const m = document.getElementById('msg');
+m.textContent = t;
+m.className = ok ? 'success' : '';
+}
+window.onload = () => {
+recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {'size':'normal','callback':()=>{ showMsg('Captcha hari!'); }});
+recaptchaVerifier.render();
+};
+window.sendOTP = async () => {
+const phone = document.getElementById('phone').value.trim();
+if(!phone.startsWith('+') || phone.length < 10){ showMsg('Phone number eka +94 wage hariyata gahanna'); return; }
+document.getElementById('sendBtn').disabled = true;
+showMsg('OTP yawanawa...');
+try{
+confirmationResult = await signInWithPhoneNumber(auth, phone, recaptchaVerifier);
+document.getElementById('phoneSection').style.display = 'none';
+document.getElementById('otpSection').style.display = 'block';
+showMsg('OTP eka yawala! SMS balanna', true);
+}catch(e){ showMsg('Error: ' + e.message); document.getElementById('sendBtn').disabled = false; }
+};
+window.verifyOTP = async () => {
+const code = document.getElementById('otp').value.trim();
+if(code.length !== 6){ showMsg('OTP 6 digits gahanna'); return; }
+showMsg('Checking...');
+try{
+const result = await confirmationResult.confirm(code);
+document.getElementById('otpSection').style.display = 'none';
+showMsg('Login Successful!', true);
+document.getElementById('userInfo').style.display = 'block';
+document.getElementById('userInfo').innerHTML = `<p>Phone: <b>${result.user.phoneNumber}</b></p><p style="color:#00e676">✅ PRIMAX MOVIES ta Login Una!</p>`;
+}catch(e){ showMsg('OTP waradi! ' + e.message); }
+};
+window.backToPhone = () => {
+document.getElementById('otpSection').style.display = 'none';
+document.getElementById('phoneSection').style.display = 'block';
+document.getElementById('sendBtn').disabled = false;
+};
 </script>
-<!-- END COUNTDOWN -->
-<!-- ===== PRIMAX COIN SYSTEM - DARK GREEN ASITHA STYLE ===== -->
-<div style="margin:15px; background:#06281C; padding:22px; border-radius:20px; text-align:center; border:2px solid #00FF88; font-family:Arial; box-shadow:0 0 30px rgba(0,255,136,0.35);">
-
-  <!-- LOGIN -->
-  <div id="loginBox">
-    <div style="background:#0B3D2E; padding:18px; border-radius:15px; border:1px solid #00FF88;">
-      <h2 style="color:#00FF88; margin:0;">🔐 LOGIN TO PRIMAX</h2>
-      <p style="color:#B8FFD9; font-size:13px;">Login to request movies & earn coins</p>
-      <input id="userName" placeholder="Your Name" style="width:92%; padding:13px; margin:6px; border-radius:12px; border:1px solid #00FF88; background:#06281C; color:white; outline:none;">
-      <input id="userNum" placeholder="WhatsApp Number" style="width:92%; padding:13px; margin:6px; border-radius:12px; border:1px solid #00FF88; background:#06281C; color:white; outline:none;">
-      <button onclick="doLogin()" style="width:92%; padding:14px; background:#00C853; border:none; border-radius:12px; color:white; font-weight:bold; font-size:16px; box-shadow:0 4px 15px rgba(0,200,83,0.5);">LOGIN NOW</button>
-    </div>
-  </div>
-
-  <!-- MAIN -->
-  <div id="mainBox" style="display:none;">
-    <p id="welcome" style="color:white; font-weight:bold; font-size:17px;"></p>
-    
-    <div style="background:linear-gradient(45deg,#00FF88,#00C853); padding:18px; border-radius:15px; box-shadow:0 0 20px rgba(0,255,136,0.4);">
-      <b style="font-size:26px; color:#06281C;">🪙 <span id="coinBal">0</span> COINS</b><br>
-      <span style="font-size:12px; color:#06281C; font-weight:bold;">1 Movie Request = 10 Coins</span>
-    </div>
-
-    <h3 style="color:#00FF88; margin-top:20px;">💰 GET COINS 🪙</h3>
-
-    <!-- FOLLOW -->
-    <div style="background:#0B3D2E; padding:16px; border-radius:15px; margin:10px 0; border:1px solid #00FF88;">
-      <p style="color:white; margin:0; font-weight:bold; font-size:16px;">📢 Follow Our Channel</p>
-      <p style="color:#B8FFD9; font-size:12px; margin:6px;">Follow our WhatsApp Channel & Get 50 Coins</p>
-      <a href="https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T" target="_blank" style="display:block; background:#25D366; color:white; padding:12px; border-radius:10px; text-decoration:none; font-weight:bold;">FOLLOW CHANNEL</a>
-      <button onclick="claimFollow()" style="width:100%; padding:11px; background:#00FF88; color:#06281C; border:none; border-radius:10px; margin-top:8px; font-weight:bold;">CLAIM +50 COINS</button>
-    </div>
-
-    <!-- SHARE -->
-    <div style="background:#0B3D2E; padding:16px; border-radius:15px; margin:10px 0; border:1px solid #00FF88;">
-      <p style="color:white; margin:0; font-weight:bold; font-size:16px;">🔗 Share & Earn</p>
-      <p style="color:#B8FFD9; font-size:12px; margin:6px;">Share our channel to 1 friend = 10 Coins<br>Share to 2 friends = 20 Coins</p>
-      <button onclick="shareChannel()" style="width:100%;background:#25D366;color:#fff;padding:12px;border:none;border-radius:10px;font-weight:800;margin:8px 0;">📱 SHARE ON WHATSAPP</button>
-<button onclick="claimShare()" style="width:100%;padding:12px;background:#00c853;color:#000;border:none;border-radius:10px;font-weight:800;">CLAIM SHARE COINS</button>
-      </div>
-
-    <!-- REQUEST -->
-    <h3 style="color:#00FF88;">🎬 REQUEST A MOVIE</h3>
-    <input id="movieName" placeholder="Enter Movie Name" style="width:92%; padding:13px; border-radius:12px; border:1px solid #00FF88; background:#06281C; color:white; outline:none;">
-    <button onclick="sendRequest()" style="width:92%; padding:14px; background:#00C853; color:white; border:none; border-radius:12px; font-weight:bold; margin-top:8px; font-size:15px; box-shadow:0 4px 15px rgba(0,200,83,0.5);">REQUEST MOVIE - 10 COINS</button>
-    
-    <br><button onclick="doLogout()" style="background:none; border:none; color:#888; margin-top:12px;">Logout</button>
-    <p style="color:#7FB89A; font-size:11px;">🔒 Your number is private. Only Admin can see it.</p>
-  </div>
-</div>
-
-<script>
-function getCoins(){ return parseInt(localStorage.getItem("primax_coins")||"0"); }
-function setCoins(c){ localStorage.setItem("primax_coins", c); document.getElementById("coinBal").innerHTML=c; }
-function doLogin(){
-  var n=document.getElementById("userName").value.trim();
-  var p=document.getElementById("userNum").value.trim();
-  if(n==""||p==""){ alert("Please enter Name + Number!"); return; }
-  localStorage.setItem("primax_user",n);
-  localStorage.setItem("primax_num",p);
-  if(!localStorage.getItem("primax_coins")) localStorage.setItem("primax_coins","0");
-  showBox();
-}
-function showBox(){
-  var u=localStorage.getItem("primax_user");
-  if(u){
-    document.getElementById("loginBox").style.display="none";
-    document.getElementById("mainBox").style.display="block";
-    document.getElementById("welcome").innerHTML="Welcome "+u+" 👋";
-    setCoins(getCoins());
-  }
-}
-function claimFollow(){
-  if(localStorage.getItem("primax_follow")){ alert("You already claimed 50 Coins!"); return; }
-  localStorage.setItem("primax_follow","yes");
-  setCoins(getCoins()+50);
-  alert("50 Coins Added! 🪙");
-}
-let didShare = false;
-function shareChannel(){
-  didShare = true;
-  let msg = "🔥 JOIN PRIMAX MOVIES 🔥%0A%0ABest Movie Channel in Sri Lanka! 🎬%0A%0A👉 Follow Here: https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T%0A%0A💰 Get Free Coins & Request Movies!";
-  window.open("https://wa.me/?text=" + msg, "_blank");
-  alert("Dan WhatsApp eke friend kenekta yawanna! Ita passe CLAIM obanna.");
-}
-function claimShare(){
-  if(!didShare){
-    alert("Mulin SHARE ON WHATSAPP button eka obanna! Share karanne nathuwa claim karanna ba!");
-    return;
-  }
-  setCoins(getCoins() + 10);
-  alert("10 Coins Added! 😍");
-  didShare = false;
-}
-
-function sendRequest(){
-  var m=document.getElementById("movieName").value.trim();
-  var u=localStorage.getItem("primax_user");
-  var p=localStorage.getItem("primax_num");
-  if(m==""){ alert("Enter Movie Name!"); return; }
-  if(getCoins()<10){ alert("Not enough coins! You need 10 Coins. Follow / Share to earn!"); return; }
-  setCoins(getCoins()-10);
-  var msg="🎬 NEW MOVIE REQUEST%0A%0AName: "+u+"%0ANumber: "+p+"%0AMovie: "+m+"%0ACoins Left: "+getCoins();
-  window.open("https://wa.me/94786436771?text="+msg, "_blank");
-  document.getElementById("movieName").value="";
-}
-function doLogout(){ localStorage.removeItem("primax_user"); localStorage.removeItem("primax_num"); location.reload(); }
-showBox();
-</script>
-<!-- ===== END ===== -->
-  <!-- FLOATING WHATSAPP - REAL ICON -->
-<style>
-#waFloat{position:fixed;bottom:20px;right:20px;z-index:9999;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,0.4);border:none;}
-#waFloat svg{width:34px;height:34px;fill:white;}
-#waPopup{position:fixed;bottom:90px;right:20px;z-index:9999;width:300px;max-width:calc(100vw - 40px);background:#fff;border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,0.3);display:none;}
-#waPopup h3{color:#111;margin:0 0 12px 0;font-size:18px;font-weight:800;}
-.waCard{display:flex;gap:10px;align-items:center;background:#f1f5f9;padding:12px;border-radius:12px;margin-bottom:10px;text-decoration:none;color:#111;}
-.waCard b{font-size:14px;display:block;}
-.waCard span{font-size:12px;color:#555;}
-</style>
-
-<button id="waFloat" onclick="toggleWa()">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</button>
-
-<div id="waPopup">
-  <h3>Get Support</h3>
-  <a class="waCard" href="https://wa.me/94786436771?text=Hi%20Primax%20Movies!%20Help%20one" target="_blank">
-    <div>📞</div>
-    <div><b>Admin Support (Primax)</b><span>+94786436771</span></div>
-  </a>
-  <a class="waCard" href="https://whatsapp.com/channel/0029Vb6GCuD4d0n6M6v7y01" target="_blank">
-    <div>📢</div>
-    <div><b>Official WhatsApp Channel</b><span>Join for updates and movies.</span></div>
-  </a>
-</div>
-
-<script>
-function toggleWa(){
-  let p = document.getElementById('waPopup');
-  if(p.style.display === 'block'){ p.style.display = 'none'; }
-  else { p.style.display = 'block'; }
-}
-  function openHollywood(){
-  let user = localStorage.getItem("primax_user");
-  if(!user){
-    alert("Mulin Login wenna ona! 🔐 Hollywood Updates balanna Login wenna!");
-    document.getElementById("loginBox").scrollIntoView({behavior:"smooth"});
-    return;
-  }
-  window.open("Hollywood.html", "_blank");
-  }
-</script>
-  <!-- START OMDb AUTO MOVIES -->
-<script>
-const OMDB_KEY = "11a00413";
-let movieList = ["Avatar", "Avengers Endgame", "Pushpa 2", "Jawan", "Interstellar"];
-
-async function loadMovies() {
-  let box = document.getElementById("movies");
-  if(!box) return;
-  box.innerHTML = "";
-  for (let name of movieList) {
-    let res = await fetch(`https://www.omdbapi.com/?t=${name}&apikey=${OMDB_KEY}`);
-    let data = await res.json();
-    if (data.Response === "True") {
-      box.innerHTML += `
-        <div class="movie-card">
-          <img src="${data.Poster}">
-          <h3>${data.Title}</h3>
-          <p>⭐ ${data.imdbRating} | ${data.Year}</p>
-        </div>
-      `;
-    }
-  }
-}
-loadMovies();
-</script>
-<!-- END OMDb -->
-<!-- END FLOATING WHATSAPP -->
 </body>
 </html>
