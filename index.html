@@ -24,10 +24,11 @@ p{padding:0 20px;font-size:18px}
 .movie-card p{font-size:12px;color:#ccc;margin:0}
 </style></head>
 <body>
-<!-- WELCOME POPUP START -->
+<!-- WELCOME POPUP START - BLUR EFFECT -->
 <style>
-#welcomePopup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box}
-.popup-box{background:white;border-radius:20px;padding:30px 20px;text-align:center;max-width:380px;width:100%;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+#welcomePopup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;box-sizing:border-box}
+.popup-box{background:white;border-radius:20px;padding:30px 20px;text-align:center;max-width:380px;width:100%;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.3);animation:popUp 0.4s ease}
+@keyframes popUp{from{transform:scale(0.8);opacity:0}to{transform:scale(1);opacity:1}}
 .popup-close{position:absolute;top:10px;right:15px;font-size:22px;cursor:pointer;color:#333;border:none;background:none}
 .popup-box h2{color:#111;font-size:24px;margin:10px 0}
 .popup-box h2 span{color:#ff8a00}
@@ -73,14 +74,12 @@ setInterval(createSnow,200);
 .bounce-letter{display:inline-block;animation:bounceUpDown 1s ease-in-out infinite}
 @keyframes bounceUpDown{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 </style>
-
 <!-- FIXED HEADER START -->
 <div class="top">
   <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">🎬 PRIMAX<span>.MOVIES</span></div>
   <div class="login" onclick="goToLogin()">Login</div>
 </div>
 <!-- FIXED HEADER END -->
-
 <style>
 .dot-loader{display:flex; gap:10px; justify-content:center; margin:20px;}
 .dot-loader span{width:14px; height:14px; background:#00ff88; border-radius:50%; animation: bounce 0.6s infinite alternate;}
@@ -126,7 +125,7 @@ function goToLogin(){
 }
 </script>
 <!-- END COUNTDOWN -->
-<!-- ===== PRIMAX COIN SYSTEM - DARK GREEN ASITHA STYLE ===== -->
+<!-- ===== PRIMAX COIN SYSTEM ===== -->
 <div style="margin:15px; background:#06281C; padding:22px; border-radius:20px; text-align:center; border:2px solid #00FF88; font-family:Arial; box-shadow:0 0 30px rgba(0,255,136,0.35);">
   <div id="loginBox">
     <div style="background:#0B3D2E; padding:18px; border-radius:15px; border:1px solid #00FF88;">
