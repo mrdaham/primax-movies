@@ -3,10 +3,13 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRIMAX MOVIES</title>
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <style>
 body{margin:0;font-family:Arial;background:#FF4D00;text-align:center;color:black}
 .top{display:flex;justify-content:space-between;align-items:center;padding:15px}
-.logo{font-size:22px;font-weight:900;cursor:pointer}
+.logo{font-size:22px;font-weight:900;cursor:pointer;display:flex;align-items:center;gap:8px}
+.logo img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #FFC107;background:white}
 .logo span{color:#FFC107}
 .login{background:#FFC107;padding:8px 20px;border-radius:20px;font-weight:bold;cursor:pointer}
 h1{font-size:48px;line-height:1.1;margin:20px 10px}
@@ -22,6 +25,11 @@ p{padding:0 20px;font-size:18px}
 .movie-card img{width:100%;border-radius:8px}
 .movie-card h3{font-size:14px;margin:8px 0 4px}
 .movie-card p{font-size:12px;color:#ccc;margin:0}
+/* SHORTCUT ICONS - GOOGLE STYLE */
+.shortcuts{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;padding:10px 15px 5px}
+.shortcut{text-decoration:none;text-align:center;width:72px}
+.shortcut-icon{width:62px;height:62px;background:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto;box-shadow:0 4px 12px rgba(0,0,0,0.25)}
+.shortcut span{display:block;color:white;font-size:12px;font-weight:bold;margin-top:6px}
 </style></head>
 <body>
 <!-- WELCOME POPUP START - BLUR EFFECT -->
@@ -76,10 +84,21 @@ setInterval(createSnow,200);
 </style>
 <!-- FIXED HEADER START -->
 <div class="top">
-  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">🎬 PRIMAX<span>.MOVIES</span></div>
+  <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})"><img src="logo.png" alt="PRIMAX" onerror="this.style.display='none'">🎬 PRIMAX<span>.MOVIES</span></div>
   <div class="login" onclick="goToLogin()">Login</div>
 </div>
 <!-- FIXED HEADER END -->
+
+<!-- SHORTCUTS - GOOGLE STYLE -->
+<div class="shortcuts">
+  <a class="shortcut" href="https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T" target="_blank"><div class="shortcut-icon">💬</div><span>WhatsApp</span></a>
+  <a class="shortcut" href="Telegram.html"><div class="shortcut-icon">📲</div><span>Telegram</span></a>
+  <a class="shortcut" href="#" onclick="openHollywood();return false;"><div class="shortcut-icon">🎬</div><span>Hollywood</span></a>
+  <a class="shortcut" href="#movies"><div class="shortcut-icon">🍿</div><span>Movies</span></a>
+  <a class="shortcut" href="#loginBox"><div class="shortcut-icon">🪙</div><span>Coins</span></a>
+</div>
+<!-- SHORTCUTS END -->
+
 <style>
 .dot-loader{display:flex; gap:10px; justify-content:center; margin:20px;}
 .dot-loader span{width:14px; height:14px; background:#00ff88; border-radius:50%; animation: bounce 0.6s infinite alternate;}
