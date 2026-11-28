@@ -166,7 +166,7 @@ showBox();
   <a class="waCard" href="https://whatsapp.com/channel/0029Vb6GCuD4d0n6M6v7y01" target="_blank"><div>📢</div><div><b>Official WhatsApp Channel</b><span>Join for updates and movies.</span></div></a>
 </div>
 
-<!-- ===== PRIMAX AI CHAT ===== -->
+<!-- ===== PRIMAX AI CHAT - SUPER AI ===== -->
 <style>
 #aiBtn{position:fixed;bottom:90px;right:20px;z-index:9998;width:60px;height:60px;background:#7B2FFF;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;box-shadow:0 5px 20px rgba(0,0,0,0.4);border:2px solid #fff;overflow:hidden;padding:0}
 #aiBtn img{width:100%;height:100%;border-radius:50%;object-fit:cover}
@@ -185,20 +185,76 @@ showBox();
 <div id="aiBtn" onclick="toggleAI()"><img src="ai.png" onerror="this.style.display='none';this.parentElement.innerHTML='🤖'"></div>
 <div id="aiBox">
   <div id="aiHead"><span>🤖 PRIMAX AI</span><span onclick="toggleAI()" style="cursor:pointer">✕</span></div>
-  <div id="aiMsgs"><div class="aiMsg aiBot">Ayubowan! 👋 Mama PRIMAX AI. Movie ekak hoyanna da? Coins gana ahanna da? Kiyanna!</div></div>
+  <div id="aiMsgs"><div class="aiMsg aiBot">Ayubowan! 👋 Mama PRIMAX AI. Monawa hari ahanna! Movie ekak, Coins, Hollywood, Maths, okkoma ahanna puluwan!</div></div>
   <div class="aiQuick">
     <button onclick="askAI('Latest movies')">🎬 Latest Movies</button>
     <button onclick="askAI('Coins kohomada ganne')">🪙 Coins</button>
     <button onclick="askAI('Avengers Doomsday')">🔥 Avengers</button>
     <button onclick="askAI('Hollywood')">🎥 Hollywood</button>
   </div>
-  <div id="aiInputBox"><input id="aiInput" placeholder="Movie ekak ahanna..." onkeypress="if(event.key==='Enter')sendAI()"><button id="aiSend" onclick="sendAI()">Send</button></div>
+  <div id="aiInputBox"><input id="aiInput" placeholder="Mona hari ahanna..." onkeypress="if(event.key==='Enter')sendAI()"><button id="aiSend" onclick="sendAI()">Send</button></div>
 </div>
 <script>
 function toggleAI(){let b=document.getElementById('aiBox');b.style.display=b.style.display==='flex'?'none':'flex';}
 function askAI(t){document.getElementById('aiInput').value=t;sendAI();}
-function sendAI(){let inp=document.getElementById('aiInput');let txt=inp.value.trim();if(!txt)return;let box=document.getElementById('aiMsgs');box.innerHTML+=`<div class="aiMsg aiUser">${txt}</div>`;inp.value='';setTimeout(()=>{box.innerHTML+=`<div class="aiMsg aiBot">${getAIReply(txt)}</div>`;box.scrollTop=box.scrollHeight;},600);box.scrollTop=box.scrollHeight;}
-function getAIReply(q){q=q.toLowerCase();if(q.includes('coin'))return "🪙 Coins ganna lesi! WhatsApp Channel Follow karala +50 Coins, Friend kenekta Share karala +10 Coins. 1 Movie Request = 10 Coins!";if(q.includes('avenger')||q.includes('doomsday'))return "🔥 AVENGERS: DOOMSDAY - 18 Dec 2026 enawa! Countdown eka site eke udin thiyenawa.";if(q.includes('hollywood'))return "🎬 Hollywood Updates balanna Login wenna ona!";if(q.includes('latest')||q.includes('movie')||q.includes('film'))return "🎬 Latest Movies site eke udin thiyenawa! Avatar, Avengers Endgame, Pushpa 2 wage thiyenawa. Request = 10 Coins!";if(q.includes('hi')||q.includes('hello')||q.includes('ayubowan')||q.includes('kohomada'))return "Ayubowan! 😍 Kohomada? Movie ekak hoyanna da?";if(q.includes('whatsapp')||q.includes('channel'))return "📱 Channel: https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T";if(q.includes('admin')||q.includes('contact')||q.includes('help'))return "📞 Admin: https://wa.me/94786436771";return "Hmm! 🤔 Eka gana mama danne na. 'Latest movies' kiyala ahanna.";}
+async function sendAI(){
+  let inp=document.getElementById('aiInput');
+  let txt=inp.value.trim(); if(!txt) return;
+  let box=document.getElementById('aiMsgs');
+  box.innerHTML+=`<div class="aiMsg aiUser">${txt}</div>`;
+  inp.value=''; box.scrollTop=box.scrollHeight;
+  let typing=document.createElement('div'); typing.className='aiMsg aiBot'; typing.id='typing'; typing.innerHTML='Typing... ⏳'; box.appendChild(typing); box.scrollTop=box.scrollHeight;
+  let reply = await getSuperAIReply(txt);
+  document.getElementById('typing').remove();
+  box.innerHTML+=`<div class="aiMsg aiBot">${reply}</div>`; box.scrollTop=box.scrollHeight;
+}
+async function getSuperAIReply(orig){
+  let q=orig.toLowerCase().trim();
+  // MATHS
+  try{ if(/^[0-9+\-*/(). ]+$/.test(orig) && /[+\-*/]/.test(orig)){ let ans=eval(orig); return "🧮 "+orig+" = <b>"+ans+"</b>"; } }catch(e){}
+  if(q.includes('time')||q.includes('welawa')||q.includes('kiyada dan')) return "⏰ Dan welawa: <b>"+new Date().toLocaleTimeString()+"</b> | Date: "+new Date().toLocaleDateString();
+  if(q.includes('hi')||q.includes('hello')||q.includes('ayubowan')||q.includes('kohomada')||q.includes('mokada')||q.includes('hey')) return "Ayubowan! 😍 Mama hodin! Oya kohomada? Movie ekak hoyanna da? Monawa hari ahanna!";
+  if(q.includes('kauda')||q.includes('oya kauda')||q.includes('who are you')||q.includes('name')) return "Mama PRIMAX AI 🤖 Daham aiya hadapu AI Assistant! Movies, Coins, Hollywood gana okkoma dannawa. Monawa hari ahanna!";
+  if(q.includes('coin')) return "🪙 Coins ganna lesi! Channel Follow = +50 Coins, Share = +10 Coins. 1 Movie Request = 10 Coins. Login wela balanna!";
+  if(q.includes('avenger')||q.includes('doomsday')) return "🔥 AVENGERS: DOOMSDAY - 18 Dec 2026 enawa! Marvel ge lokuma movie eka! Thawa "+Math.ceil((new Date('Dec 18, 2026')-new Date())/(1000*60*60*24))+" days thiyenawa!";
+  if(q.includes('hollywood')) return "🎬 Hollywood Updates balanna Login wenna ona! Login wela Hollywood button eka obanna. Aluthma Hollywood news okkoma thiyenawa!";
+  if(q.includes('latest')||q.includes('aluth')||q.includes('new movie')) return "🎬 Aluthma Movies: Avatar, Avengers Endgame, Pushpa 2, Jawan, Interstellar. Thawa one nam Request karanna - 10 Coins witharai!";
+  if(q.includes('telegram')) return "📲 Telegram Channel eka site eke buttons wala thiyenawa. Eka obanna!";
+  if(q.includes('whatsapp')||q.includes('channel')) return "📱 Channel: https://whatsapp.com/channel/0029VbCdLuvFsn0X7ucf5P3T - Follow karala +50 Coins ganna!";
+  if(q.includes('admin')||q.includes('contact')||q.includes('help')||q.includes('support')) return "📞 Admin: https://wa.me/94786436771 - Direct message ekak danna, admin uththara denawa!";
+  if(q.includes('login')||q.includes('sign')) return "🔐 Login wenna Name + WhatsApp Number dala LOGIN NOW obanna. Ita passe Coins, Request okkoma puluwan!";
+  if(q.includes('request')) return "🎬 Request karanna Login wela Movie Name eka type karala REQUEST obanna. 10 Coins yanawa. Admin ta WhatsApp message ekak yanawa!";
+  if(q.includes('free')||q.includes('nothe')||q.includes('price')||q.includes('salli')) return "💰 Site eka FREE! Coins witharai one. Salli gewanna ona na! Coins FREE ganna puluwan!";
+  if(q.includes('thank')||q.includes('thanks')||q.includes('stuti')) return "Ane welcome! 😍 Thawa movie ekak one nam kiyanna!";
+  if(q.includes('bye')) return "Bye bye! 👋 Aye enna! Movie balanna amathaka karanna epa!";
+  if(q.includes('sinhala')||q.includes('lanka')) return "🇱🇰 Sinhala movies thiyenawa! Request karanna - Admin hoyala denawa! Aluth Sinhala movies Channel eke danawa!";
+  if(q.includes('horror')) return "😱 Horror Movies: Conjuring, Annabelle, IT, A Quiet Place wage thiyenawa! Request karanna, Admin denawa!";
+  if(q.includes('comedy')) return "😂 Comedy Movies: Hichki, 3 Idiots, Pushpa wage fun movies thiyenawa! Request karanna!";
+  if(q.includes('action')) return "💥 Action Movies: Avengers, John Wick, Pushpa 2, Jawan wage thiyenawa! Best action tika Channel eke!";
+  if(q.includes('love')||q.includes('romantic')||q.includes('aadare')) return "❤️ Love Movies: Titanic, A Walk to Remember wage thiyenawa! Request karanna!";
+  if(q.includes('cricket')||q.includes('football')||q.includes('match')) return "🏏 Cricket / Football updates Channel eke danawa! Sports gana ahanna Admin ta kiyanna!";
+  if(q.includes('weather')||q.includes('kalam')) return "🌦️ Lankave dan weather eka - Colombo wala wassa wage! Google eke 'weather Colombo' kiyala balanna!";
+  if(q.includes('joke')||q.includes('funny')||q.includes('hasanna')) return "😂 Joke ekak: Teacher - 'Yako homework ko?' Student - 'Sir, dog kawa!' Teacher - 'Dogta homework kanna puluwan da?' Student - 'Ow sir, mage dogta PRIMAX Movies balanna ona nisa!' 😂";
+  if(q.includes('song')||q.includes('sindu')) return "🎵 Sindu ahanna one nam YouTube eke PRIMAX Movies Channel eke balanna! Movie songs okkoma thiyenawa!";
+  if(q.includes('game')||q.includes('game ekak')) return "🎮 Games gana ahanna da? Free Fire, PUBG wage games gana Channel eke danawa!";
+
+  // MOVIE SEARCH - OMDB eken hoyanawa
+  try{
+    let res=await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(orig)}&apikey=11a00413`);
+    let d=await res.json();
+    if(d.Response==="True"){
+      return `🎬 <b>${d.Title}</b> (${d.Year})<br>⭐ IMDB: ${d.imdbRating}<br>🎭 ${d.Genre}<br>🎥 ${d.Director}<br>📖 ${d.Plot}<br><br>Me movie eka one nam Request karanna - 10 Coins!`;
+    }
+  }catch(e){}
+
+  // SMART FALLBACK - hamoma prashna walata uththarayak
+  let fallbacks=[
+    `Ohh! "${orig}" gana mama danawa! 😍 Eka gana thawa wisthara Channel eke thiyenawa. Request karanna nam 10 Coins witharai! Thawa mona hari ahanna!`,
+    `Hmm "${orig}" - hondai hondai! 🤔 Eka gana Admin dannawa. Eth mama kiyanne - Channel eke balanna, eke okkoma thiyenawa! Thawa ahanna!`,
+    `"${orig}" gana ahala hondai! 🎬 Mama PRIMAX AI - Movies gana expert! E movie eka / e deya Request karanna puluwan - Login wela Request karanna!`
+  ];
+  return fallbacks[Math.floor(Math.random()*fallbacks.length)];
+}
 </script>
 <!-- ===== END AI CHAT ===== -->
 
